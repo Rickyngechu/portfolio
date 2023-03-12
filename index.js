@@ -483,6 +483,7 @@ writeLoop(false);
 const btnAbout = document.querySelector('.about-btn');
 const section1 = document.querySelector('.section-about');
 const navLink = document.querySelector('.navigation-link');
+const navLinkMob = document.querySelector('.mob');
 
 btnAbout.addEventListener('click', function (e) {
   //preventing the initial functionality
@@ -492,6 +493,15 @@ btnAbout.addEventListener('click', function (e) {
 
 // SMOOTH SCROLL ON LINKS
 navLink.addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log('link');
+  if (e.target.classList.contains('nav-link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
+
+navLinkMob.addEventListener('click', function (e) {
   e.preventDefault();
   if (e.target.classList.contains('nav-link')) {
     const id = e.target.getAttribute('href');
