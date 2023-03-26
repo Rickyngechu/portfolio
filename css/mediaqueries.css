@@ -68,6 +68,7 @@ CSS MEDIA QUERIES*/
     color: #fff;
     font-size: 190%;
     font-weight: 500;
+    padding: 1rem;
   }
   .text-1 {
     font-size: 150%;
@@ -130,11 +131,7 @@ CSS MEDIA QUERIES*/
   .hamburger {
     position: fixed;
     top: 1.3rem;
-    right: 0.3rem;
-    border: none;
-    outline: none;
-    background: none;
-    z-index: 100;
+    right: 1rem;
   }
   .hamburger span {
     position: relative;
