@@ -482,8 +482,17 @@ writeLoop(false);
 //IMPLEMENTING THE SMOOTH SCROLL ON ELEMENTS
 const btnAbout = document.querySelector('.about-btn');
 const section1 = document.querySelector('.section-about');
-const navLink = document.querySelector('.navigation-link');
-const navLinkMob = document.querySelector('.mob');
+const navLink = document.querySelector('.navigation-link__cont');
+const navLinkMob = document.querySelector('.mobile-cont');
+const navi = document.querySelector('.navigation');
+const head = document.querySelector('.header');
+const nav = document.querySelector('.nav');
+
+const closeMb = document.querySelector('.toggle');
+const openMb = document.querySelector('.hamburger');
+
+const mobile = document.querySelector('.mobile');
+const mobileNav = document.querySelector('.mobile-nav');
 
 btnAbout.addEventListener('click', function (e) {
   //preventing the initial functionality
@@ -491,38 +500,69 @@ btnAbout.addEventListener('click', function (e) {
   section1.scrollIntoView({ behavior: 'smooth' });
 });
 
-// SMOOTH SCROLL ON LINKS
+///////////////////////////////////////////////////////
+//Smooth scroll on desktop links
 navLink.addEventListener('click', function (e) {
   e.preventDefault();
-  console.log('link');
   if (e.target.classList.contains('nav-link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+  if (!e.target.classList.contains('nav-link')) {
     const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
 
+/////////////////////////////////////////////////////////////
+//Smooth scrooll for mobile links
 navLinkMob.addEventListener('click', function (e) {
   e.preventDefault();
-  if (e.target.classList.contains('nav-link')) {
+  if (e.target.classList.contains('mobile-link')) {
     const id = e.target.getAttribute('href');
     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
   }
 });
 
-const navH = document.querySelector('.hamburger');
-const mobile = document.querySelector('.mob');
-const mobileNav = document.querySelector('.mobile-nav');
+///////////////////////////////////////////////////////
+//Implementing the sticky nav
+const navH = navi.getBoundingClientRect().height;
 console.log(navH);
+const callback = function (entries, observer) {
+  const entry = entries[0];
+  console.log(entry);
+  if (!entry.isIntersecting) {
+    navi.classList.add('sticky');
+  } else navi.classList.remove('sticky');
+};
 
-//THE NAVIGATION TOGGLE BUTTON
-navH.addEventListener('click', function () {
-  navH.classList.toggle('is-active');
+const sectionObs = new IntersectionObserver(callback, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navH}px`,
+});
+sectionObs.observe(head);
 
-  if (!navH.classList.contains('is-active')) {
-    mobileNav.classList.add('mb');
-    mobileNav.style.display = 'flex';
-  }
-  if (navH.classList.contains('is-active')) {
-    mobileNav.classList.remove('mb');
-  }
+////////////////////////////////////////////////////////////
+//MOBILE NAVIGATION TOGGLE
+
+// Open navi
+openMb.addEventListener('click', function () {
+  console.log('opening');
+  mobileNav.style.width = '40%';
+  mobileNav.style.visibility = 'visible';
+  mobileNav.style.opacity = 1;
+  mobile.style.opacity = 1;
+  mobile.style.zIndex = 1000;
+});
+
+// Close navi
+closeMb.addEventListener('click', function () {
+  mobileNav.style.width = 0;
+  mobileNav.style.visibility = 'hidden';
+  mobileNav.style.opacity = 0;
+  // mobile.style.display = 'none';
+  // mobile.style.width = 0;
+  mobile.style.opacity = 0;
+  mobile.style.zIndex = 0;
 });
