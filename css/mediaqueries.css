@@ -130,8 +130,9 @@ CSS MEDIA QUERIES*/
   }
   .hamburger {
     position: fixed;
-    top: 1.3rem;
+    top: 1rem;
     right: 1rem;
+    z-index: 100;
   }
   .hamburger span {
     position: relative;
