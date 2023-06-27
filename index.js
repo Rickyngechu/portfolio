@@ -527,10 +527,10 @@ navLinkMob.addEventListener('click', function (e) {
 ///////////////////////////////////////////////////////
 //Implementing the sticky nav
 const navH = navi.getBoundingClientRect().height;
-console.log(navH);
+// console.log(navH);
 const callback = function (entries, observer) {
   const entry = entries[0];
-  console.log(entry);
+  // console.log(entry);
   if (!entry.isIntersecting) {
     navi.classList.add('sticky');
   } else navi.classList.remove('sticky');
@@ -548,7 +548,7 @@ sectionObs.observe(head);
 
 // Open navi
 openMb.addEventListener('click', function () {
-  console.log('opening');
+  // console.log('opening');
   mobileNav.style.width = '40%';
   mobileNav.style.visibility = 'visible';
   mobileNav.style.opacity = 1;
